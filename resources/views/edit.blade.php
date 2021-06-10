@@ -7,17 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/regiter.css">
-    <title>Laravel Crud | Edit users Page</title>
+        <link rel="stylesheet" href="/css/RegisterStyle.css">
+    <title>Laravel Crud | Edit user Info</title>
 
 </head>
-<style>
-    form {
-        border: 1px solid royalblue;
-        padding: 10px;
-        margin-top: 5rem;
-    }
-</style>
 
 <body>
     <div class="container">
@@ -66,7 +59,7 @@
             @endif
         </select>
     </div>
-    <button type="submit" class="btn btn-primary">update</button>
+    <button type="submit" class="btn btn-primary">Update</button>
     </fieldset>
     </form>
     </div>

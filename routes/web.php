@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('register');
+    
 });
 Route::post("register", [UserController::class, 'register']);
 Route::get("dashboard", [UserController::class, 'getAllUsers']);

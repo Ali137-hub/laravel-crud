@@ -9,61 +9,54 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/regiter.css">
-        <title>Laravel Crud | Dash Page</title>
+        <link rel="stylesheet" href="/css/Dashboard.css">
+        <title>Laravel Crud | Dashboard</title>
     </head>
 </head>
-<style>
-    .outer-container {
-        border: 1px solid royalblue;
-        padding: 10px;
-    }
-</style>
 
 <body>
-    <div class="container mt-5 outer-container">
+    <div class="container mt-5 border p-3">
         <table class="table  ">
             <fieldset>
                 <legend>
-                    <div class="d-flex justify-content-between"">
+                    <div class="d-flex justify-content-between">
                         <div>
-                            <h1>Registered user</h1>
+                                <h1>Registered user</h1>
+                            </div>
+                            <div>
+                                <a href="/" class="btn btn-primary">Register</a>
                         </div>
-                        <div>
-                            <a href="/" class="btn btn-primary">Register</a>
+
                     </div>
 
-    </div>
+                </legend>
 
-    </legend>
+                <tbody>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    @foreach ($users as $user)
+                    <tr scope="row">
+                        <td>{{$user['id']}}</td>
+                        <td>{{$user['name']}}</td>
+                        <td>{{$user['email']}}</td>
+                        <td>{{$user['gender']}}</td>
+                        <td>
+                            <a href="/edit/{{$user['id']}}" class="btn btn-primary">Edit</a>
+                            <a href="/delete/{{$user['id']}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
 
-    <thead>
-
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($users as $user)
-        <tr scope="row">
-            <td>{{$user['id']}}</td>
-            <td>{{$user['name']}}</td>
-            <td>{{$user['email']}}</td>
-            <td>{{$user['gender']}}</td>
-            <td>
-                <a href="/edit/{{$user['id']}}" class="btn btn-primary">Edit</a>
-                <a href="/delete/{{$user['id']}}" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-
-    </fieldset>
-    </table>
+            </fieldset>
+        </table>
 
     </div>
 </body>
