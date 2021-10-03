@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Services\UserService;
+use App\Repositories\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
-    protected $userService;
+    protected $userRepository;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->userService = $userService;
+        $this->userRepository = $userRepository;
     }
 
 
@@ -27,7 +25,11 @@ class UserController extends Controller
 
     public function register(StoreUserRequest $req)
     {
-        $this->userService->create($req);
+        $this->userRepository->create([
+            "name" => $req->name,
+            "email" => $req->email,
+            "gender" => $req->gender
+        ]);
         return redirect("/");
     }
 
@@ -41,7 +43,7 @@ class UserController extends Controller
 
     public function getAllUsers()
     {
-        return View("dashboard", ['users' => $this->userService->users()]);
+        return View("dashboard", ['users' => $this->userRepository->getAll()]);
     }
 
     /**
@@ -54,7 +56,7 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-        $this->userService->delete($id);
+        $this->userRepository->delete($id);
         return redirect()->back();
     }
 
@@ -68,7 +70,7 @@ class UserController extends Controller
 
     public function getSingleUser($id)
     {
-        return View("edit", ['user' => $this->userService->user($id)]);
+        return View("edit", ['user' => $this->userRepository->find($id)]);
     }
 
     /**
@@ -81,7 +83,11 @@ class UserController extends Controller
     public function update(StoreUserRequest $req)
     {
 
-        $this->userService->update($req);
-        return View("dashboard", ['users' => $this->userService->users()]);
+        $this->userRepository->update($req->id, [
+            "name" => $req->name,
+            "email" => $req->email,
+            "gender" => $req->gender
+        ]);
+        return View("dashboard", ['users' => $this->userRepository->getAll()]);
     }
 }
