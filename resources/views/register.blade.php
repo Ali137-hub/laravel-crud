@@ -38,21 +38,30 @@
     <div class="mb-3 ">
         <label for="exampleInputEmail1" class="form-label">Name</label>
         <input type="text" name="name" placeholder='Your name' class="form-control" id="exampleInputEmail1"
-            aria-describedby="emailHelp">
+            value="{{ old('name') }}" aria-describedby="emailHelp">
+        @error('name') <p class="text-danger">{{ $message }}</p>
+        @enderror
+
 
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Email</label>
 
-        <input type="text" name="email" placeholder='Your email' class="form-control" id="exampleInputPassword1">
+        <input type="text" name="email" placeholder='Your email' class="form-control" id="exampleInputPassword1"
+            value="{{ old('email') }}">
+
+        @error('email') <p class="text-danger">{{ $message }}</p>
+        @enderror
     </div>
     <div class="mb-3 ">
         <label for="exampleInputPassword1" class="form-label">Select your gender</label>
 
-        <select class="form-control" name="gender" id="">
+        <select class="form-control" name="gender" id="" value="{{ old('gender') }}">
             <option>Male</option>
             <option>Female</option>
         </select>
+        @error('gender') <p class="text-danger">{{ $message }}</p>
+        @enderror
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
     </fieldset>

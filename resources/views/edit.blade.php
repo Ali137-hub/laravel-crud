@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link rel="stylesheet" href="/css/RegisterStyle.css">
+    <link rel="stylesheet" href="/css/RegisterStyle.css">
     <title>Laravel Crud | Edit user Info</title>
 
 </head>
@@ -39,6 +39,9 @@
         <label for="exampleInputEmail1" class="form-label">Name</label>
         <input type="text" name="name" placeholder='Your name' class="form-control" id="exampleInputEmail1"
             aria-describedby="emailHelp" value={{$user['name']}}>
+        @error('name') <p class="text-danger">{{ $message }}</p>
+        @enderror
+
 
     </div>
     <div class="mb-3">
@@ -46,6 +49,9 @@
 
         <input type="text" name="email" placeholder='Your email' class="form-control" id="exampleInputPassword1"
             value={{$user['email']}}>
+        @error('email') <p class="text-danger">{{ $message }}</p>
+        @enderror
+
     </div>
     <div class="mb-3 ">
         <label for="exampleInputPassword1" class="form-label">Select your gender</label>

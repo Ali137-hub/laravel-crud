@@ -2,52 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
-    public function register(Request $req)
-    {
+    protected $userService;
 
-        $name = $req->name;
-        $email = $req->email;
-        $gender = $req->gender;
-        $user = new User();
-        $user->name = $name;
-        $user->email = $email;
-        $user->gender = $gender;
-        $user->save();
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *  @author: haseeb
+     *  @param:Request
+     *  @return \Illuminate\Http\Response
+     *
+     */
+
+    public function register(StoreUserRequest $req)
+    {
+        $this->userService->create($req);
         return redirect("/");
     }
+
+    /**
+     * Display a listing of the resource.
+     *  @author: haseeb
+     *  @param:null
+     *  @return \Illuminate\Http\Response
+     *
+     */
+
     public function getAllUsers()
     {
-        $users = User::all();
-        return View("dashboard", ['users' => $users]);
-        //return User::all();
+        return View("dashboard", ['users' => $this->userService->users()]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *  @author: haseeb
+     *  @param:USER ID
+     *  @return \Illuminate\Http\Response
+     *
+     */
+
     public function deleteUser($id)
     {
-        $users = User::find($id);
-        $users->delete();
-        $usersAll = User::all();
-        return View("dashboard", ['users' => $usersAll]);
-        //return User::all();
+        $this->userService->delete($id);
+        return redirect()->back();
     }
+
+    /**
+     * Display a listing of the resource.
+     *  @author: haseeb
+     *  @param:USER ID
+     *  @return \Illuminate\Http\Response
+     *
+     */
+
     public function getSingleUser($id)
     {
-        $user = User::find($id);
-        return View("edit", ['user' => $user]);
+        return View("edit", ['user' => $this->userService->user($id)]);
     }
-    public function update(Request $req)
+
+    /**
+     * Display a listing of the resource.
+     *  @author: haseeb
+     *  @param:Request
+     *  @return \Illuminate\Http\Response
+     *
+     */
+    public function update(StoreUserRequest $req)
     {
-        $targetUserId = $req->userid;
-        $user = User::find($targetUserId);
-        $user->name = $req->name;
-        $user->email = $req->email;
-        $user->gender = $req->gender;
-        $user->save();
-        $usersAll = User::all();
-        return View("dashboard", ['users' => $usersAll]);
+
+        $this->userService->update($req);
+        return View("dashboard", ['users' => $this->userService->users()]);
     }
 }
